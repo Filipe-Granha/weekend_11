@@ -1,0 +1,106 @@
+
+body {
+  width: 100%;
+  margin: auto;
+  background:url(./world-map.jpg) fixed center;
+}
+
+.header {
+  background: #b12907;
+  width: 100%;
+  top: 0;
+  position: fixed;
+}
+
+.container {
+  width: 1050px;
+  margin: auto;
+}
+
+.logo {
+  float: left;
+  font-size: 12px;
+  margin: -10px;
+  color:white;
+}
+
+.nav {
+  float: right;
+  padding-right: 1px;
+  margin: -20px;
+}
+
+.list {
+  list-style: none;
+  float: left;
+  margin-left: 15px;
+  padding-top: 15px;
+}
+
+
+
+
+/**/
+
+a {
+  text-decoration: none;
+  color: white;
+  font-family: Futura;
+}
+
+.content { 
+ padding-top: 100px;
+ padding-left: 10px;
+ padding-right: 10px;
+ width: 95%;
+ height: 350px;
+ margin: auto; /* centers */
+ color: white;
+ font-family: Futura;
+ font-size: 12px;
+}
+
+.dropDown {
+  width: 265px;
+  float: left;
+}
+
+#source-list {
+  list-style: none;
+  margin-bottom: 10px; 
+  padding-right: 5px;
+  display: inline-block;
+}
+
+.containerMap { 
+  width: 400px;
+  margin-left:30px;
+  float:left;
+}
+
+#main-map {
+  height: 250px;
+  width:400px;
+}
+
+.hereWillBeGraphs {
+  width: 360px;
+  float:right;
+}
+
+
+/**/
+
+#footer {
+  position: fixed;
+  clear: both;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 3px;  
+  text-align: center;
+  background-color: #b12907;
+  color: white;
+  font-size: 8px;
+}
+
