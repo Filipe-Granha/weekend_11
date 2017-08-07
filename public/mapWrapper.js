@@ -29,20 +29,13 @@ MapWrapper.prototype = {
   },
 
   
-  // addChangeEventUs: function() {
-  //   google.maps.event.addDomListener(window, "change", function() {
-  //     var position = {
-  //       lat: 51,
-  //       lng: -0.12,
-  //     };
-  //       this.addMarker(position);
-  //     }.bind(this));
-  // }
-
-  // bounceMarkers: function() {
-  //   this.markers.forEach(function(marker) {
-  //     marker.setAnimation(google.maps.Animation.BOUNCE);
-  //     })
-  //   }
+  addChangeEventUs: function() {
+    google.maps.event.addDomListener(window, "change", function() {
+      var position = {
+        lat: 51,
+        lng: -0.12,
+      };
+        this.addMarker(position);
+      }.bind(this));
   }
-
+}

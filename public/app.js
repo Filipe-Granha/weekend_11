@@ -1,4 +1,6 @@
-var mainMap = null;
+
+// NEWSAPI.ORG
+////////////////////////////////////////////////////
 
 var makeRequest = function(url, callback) { // the callback is defined down in the app function
   var request = new XMLHttpRequest();
@@ -7,12 +9,14 @@ var makeRequest = function(url, callback) { // the callback is defined down in t
   request.send();
 }
 
-var requestComplete = function() { //callback from makeRequest
+var requestComplete = function() { // the callback from makeRequest
   if(this.status !== 200) return;
   var jsonString = this.responseText;
   xsources = JSON.parse(jsonString); // xsources is now a JS object
   sources = xsources.sources; // can't have 'var', otherwise won't be accessible to the next functions
   populateList(sources);
+  loadCountryCharts(sources); // passes the object also to charts
+
 }
 
 var populateList = function(sources) { // executed inside the above requestComplete function
@@ -37,8 +41,6 @@ var populateDetails = function(source) {
   var liName = document.createElement("li");
   var liCountry = document.createElement("li");
   var liUrl = document.createElement("li");
-  // var image = document.createElement("img"); // just a reminder, if an image was needded
-  // image.src = source.image_url;
   
   liName.innerText = "Title: " + source.name;
   liCountry.innerText = "Country: " + source.country;
@@ -47,24 +49,45 @@ var populateDetails = function(source) {
   ul.appendChild(liName);
   ul.appendChild(liCountry);
   ul.appendChild(liUrl).style.marginBottom = "15px";
-
-  // document.getElementById("liUrl").href = "source.url"; should set li as link ?
+  liUrl.href = "source.url"; // NOT WORKING, should set liUrl as a link ?
 
   var anotherSource = source;
   var jsonString = JSON.stringify(anotherSource);
   localStorage.setItem('anotherSource', jsonString); // saves each selected source into the localstorage, as a json string
-  console.log(jsonString)
 } 
+
+
+
+// HIGHCHARTS.COM
+/////////////////////////////
+
+var loadCountryCharts = function(sources) {
+  var sourceLanguageData = [];
+
+  for(source of sources) {
+    if(source.country === "de") {
+
+      sourceLanguageData.push({
+        name: source.category,
+        y: source.country.length
+      })
+    }
+    }
+  
+  new PieChart("Number of News Categories in Germany", sourceLanguageData);
+};
+
+
+
 
 
 var app = function () {
 
   var url = "https://newsapi.org/v1/sources";
-  makeRequest(url, requestComplete)
-
+  makeRequest(url, requestComplete);
+  
   var selectList = document.querySelector("select");
   selectList.addEventListener("change", handleSelectChange);
-
 
   ///////////////// GOOGLE MAPS bellow:
   // 3 essential lines for the map to be displayed:
@@ -73,12 +96,11 @@ var app = function () {
   var mainMap = new MapWrapper(mapDiv, center, 1); // displays the map
 
   // var warwick = [ 51.4894986, -0.1947981]; // this and any other locations are just pointers for the markers
-
   // mainMap.addMarker(center, "Do not click!", "Somewhere central in London!");
-
   // mainMap.addClickEvent(); // adds a marker to the map by clicking on the map
+  mainMap.addChangeEventUs();
+ 
+  }
 
-}
-
-window.addEventListener('load', app);
+window.addEventListener("load", app);
  
